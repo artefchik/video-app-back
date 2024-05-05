@@ -15,4 +15,9 @@ export class UsersService {
 		const users = this.dbService.user.findMany()
 		return users
 	}
+
+	async getUserByEmail(email: string) {
+		const user = await this.dbService.user.findUnique({ where: { email } })
+		return user
+	}
 }

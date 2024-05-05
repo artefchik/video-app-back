@@ -17,6 +17,6 @@ async function bootstrap() {
 	SwaggerModule.setup('/api/docs', app, document)
 
 	app.use(cookieParser())
-	await app.listen(PORT)
+	await app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 }
 bootstrap()

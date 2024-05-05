@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 import { UsersModule } from './users/users.module'
 import { ConfigModule } from '@nestjs/config'
-import { RolesModule } from './roles/roles.module'
 import { DbModule } from './db/db.module'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
 	imports: [
@@ -10,8 +10,8 @@ import { DbModule } from './db/db.module'
 		ConfigModule.forRoot({
 			envFilePath: `.env`,
 		}),
-		RolesModule,
 		DbModule,
+		AuthModule,
 	],
 	controllers: [],
 	providers: [],
