@@ -1,10 +1,17 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Get,
+	HttpCode,
+	HttpStatus,
+	Post,
+	UseGuards,
+} from '@nestjs/common'
 import { UsersService } from './users.service'
-import { CreateUserDto } from './dto/create-user.dto'
+import { CreateUserDto, User } from './dto/create-user.dto';
 import {
 	ApiOkResponse,
 	ApiOperation,
-	ApiResponse,
 	ApiTags,
 } from '@nestjs/swagger'
 import { AuthGuard } from '../auth/auth.guard'
@@ -15,16 +22,20 @@ export class UsersController {
 	constructor(private userService: UsersService) {}
 
 	@ApiOperation({ summary: 'Create a user' })
-	@ApiResponse({
-		status: 200,
+	@ApiOkResponse({
+		type: User,
 	})
+	@HttpCode(HttpStatus.OK)
 	@Post()
 	create(@Body() userDto: CreateUserDto) {
 		return this.userService.createUser(userDto)
 	}
 
 	@ApiOperation({ summary: 'Get all users' })
-	@ApiOkResponse({ status: 200 })
+	@ApiOkResponse({
+		type: User,
+	})
+	@HttpCode(HttpStatus.OK)
 	@UseGuards(AuthGuard)
 	@Get()
 	getAll() {
